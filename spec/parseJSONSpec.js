@@ -8,7 +8,13 @@ describe('parseJSON', function() {
       var equality = _.isEqual(result, expected); // why can't we use `===` here?
       // Replace this line with an `expect` statement that tests
       // the behavior described by the `it` string
-      throw new Error('Test is missing.')
+      //throw new Error('Test is missing.')
+      if (equality) {
+        console.log('passed');
+      } else {
+        console.log('we done messed up, expected ' + JSON.stringify(expected) + 'but actually got ' + JSON.stringify(result));
+      }
+      expect(equality).to.equal(true);
     });
   });
 
@@ -18,7 +24,7 @@ describe('parseJSON', function() {
         parseJSON(test);
       };
       // if you'd prefer, you can write your version of parseJSON 
-      // so that it passes this test instead of the one on line 21. 
+      // so that it passes this test instead of the one on line 23. 
       // expect(parseJSON(test)).to.equal(undefined);
       expect(fn).to.throw(SyntaxError);
     });
