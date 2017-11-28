@@ -16,7 +16,7 @@ var parseJSON = function(json) {
   if (json[0] === '{' && json[json.length - 1 ] === '}') {
     var returner = {};
     // holder array that is json split on :
-    // example {"one": 1, "two": 2};
+    // example `{"one": 1, "two": 2}`;
     // becomes ["one", "1, 'two'", "2"];
     // then split each element on ,
     // becomes ["one", "1", "two", "2"];
@@ -30,17 +30,23 @@ var parseJSON = function(json) {
         //   myElem[j] = myElem[j].slice(2, myElem[j].length - 2);
         // }
         console.log('holder2 is in the loop and is ' + holder2);
+        holder2 = holder2.concat(myElem);
       }
       //holder2[0] = holder2[0].slice(1, holder2[0].length -1);
       console.log('holder2 is ' + holder2);
       for (var j = 0; j < holder2.length; j += 2) {
+        console.log(holder2[j]);
+        holder2[j] = holder2[j].slice(2, -1);
+        holder2[j+1] = holder2[j+1].slice(0, -4);
+        console.log("after slicing " + holder2[j]);
         returner[holder2[j]] = holder2[j + 1];
+        // {"one" : "1"}
         console.log('returner is ' + JSON.stringify(returner));
         // set the key "one" equal to the value "1" in returner
       }
       //alert(returner); 
+
     }
-    returner = holder2;
   }
   return returner;
 };
